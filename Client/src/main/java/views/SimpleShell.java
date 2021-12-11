@@ -85,8 +85,11 @@ public class SimpleShell {
                     continue;
                 }
 
-                if (cmdList.get(0).equals("ids") && cmdList.size() == 2)
-
+                if (cmdList.get(0).equals("ids") && cmdList.size() == 2) {
+                    String results = tController.putId(cmdList.get(1));
+                    SimpleShell.prettyPrint(results);
+                    continue;
+                }
                 // messages
                 if (cmdList.contains("messages")) {
                     List<Message> results = tController.getMessages();
