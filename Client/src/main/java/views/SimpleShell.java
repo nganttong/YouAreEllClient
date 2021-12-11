@@ -86,6 +86,13 @@ public class SimpleShell {
                     continue;
                 }
                 // you need to add a bunch more.
+            //need to do send here
+
+//                if (list.contains("send")) {
+//                    List<Message> results = tController.getMessages();
+//                    SimpleShell.prettyPrint(results.stream().map(i -> i.toString() + "\n").collect(Collectors.joining()));
+//                    continue;
+//                }
 
                 //!! command returns the last command in history
                 if (list.get(list.size() - 1).equals("!!")) {
