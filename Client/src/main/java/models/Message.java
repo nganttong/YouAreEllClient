@@ -18,7 +18,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Message implements Comparable {
 
     private String message = "";
+    @JsonProperty("toid")
     private String toId = "";
+    @JsonProperty("fromid")
     private String fromId = "";
     private String timestamp = "";
     @JsonProperty("sequence")
