@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import controllers.IdController;
 import controllers.MessageController;
@@ -22,7 +23,8 @@ public class SimpleShell {
         System.out.println(output);
     }
     public static void main(String[] args) throws java.io.IOException {
-        TransactionController tController = null;
+        TransactionController tController = new TransactionController(new MessageController(), new IdController());
+
 
 //        YouAreEll urll = new YouAreEll(new MessageController(), new IdController());
         
@@ -72,7 +74,7 @@ public class SimpleShell {
                 // ids
                 if (list.contains("ids")) {
                     List<Id> results = tController.getIds();
-                    SimpleShell.prettyPrint(results);
+                    SimpleShell.prettyPrint(results.stream().map(i -> i.toString() + "\n").collect(Collectors.joining()));
                     continue;
                 }
 
