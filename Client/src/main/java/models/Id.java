@@ -20,7 +20,10 @@ public class Id {
         this.github = github;
     }
 
-    public Id (String name, String githubId) {}
+    public Id (String name, String githubId) {
+        this.name = name;
+        this.github = githubId;
+    }
 
     public String getUid() {
         return uid;

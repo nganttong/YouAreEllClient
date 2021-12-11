@@ -25,8 +25,11 @@ public class TransactionController {
     }
 
     public String postId(String idtoRegister, String githubName) {
-        Id tid = new Id(idtoRegister, githubName);
-        tid = idCtrl.postId(tid);
+        Id tempId = new Id(idtoRegister, githubName);
+        tempId = idCtrl.postId(tempId);
+        if(tempId == null) {
+            return ("Id not registered, something broke.");
+        }
         return ("Id registered.");
     }
 }

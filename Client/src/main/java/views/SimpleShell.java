@@ -44,7 +44,7 @@ public class SimpleShell {
 
             //input parsed into array of strings(command and arguments)
             String[] commands = commandLine.split(" ");
-            List<String> list = new ArrayList<String>();
+            List<String> cmdList = new ArrayList<String>();
 
             //if the user entered a return, just loop again
             if (commandLine.equals(""))
@@ -57,14 +57,14 @@ public class SimpleShell {
             //loop through to see if parsing worked
             for (int i = 0; i < commands.length; i++) {
                 //System.out.println(commands[i]); //***check to see if parsing/split worked***
-                list.add(commands[i]);
+                cmdList.add(commands[i]);
 
             }
-            System.out.print(list); //***check to see if list was added correctly***
-            history.addAll(list);
+            System.out.print(cmdList); //***check to see if list was added correctly***
+            history.addAll(cmdList);
 //            try {
                 //display history of shell with index
-                if (list.get(list.size() - 1).equals("history")) {
+                if (cmdList.get(cmdList.size() - 1).equals("history")) {
                     for (String s : history)
                         System.out.println((index++) + " " + s);
                     continue;
@@ -73,20 +73,27 @@ public class SimpleShell {
                 // Specific Commands.
 
                 // ids
-                if (list.contains("ids")) {
+                if (cmdList.contains("ids") && cmdList.size() == 1) {
                     List<Id> results = tController.getIds();
                     SimpleShell.prettyPrint(results.stream().map(i -> i.toString() + "\n").collect(Collectors.joining()));
                     continue;
                 }
 
+                if (cmdList.get(0).equals("ids") && cmdList.size() == 3) {
+                    String results = tController.postId(cmdList.get(1), cmdList.get(2));
+                    SimpleShell.prettyPrint(results);
+                    continue;
+                }
+
+
+
                 // messages
-                if (list.contains("messages")) {
+                if (cmdList.contains("messages")) {
                     List<Message> results = tController.getMessages();
                     SimpleShell.prettyPrint(results.stream().map(i -> i.toString() + "\n").collect(Collectors.joining()));
                     continue;
                 }
                 // you need to add a bunch more.
-            //need to do send here
 
 //                if (list.contains("send")) {
 //                    List<Message> results = tController.getMessages();
@@ -95,7 +102,7 @@ public class SimpleShell {
 //                }
 
                 //!! command returns the last command in history
-                if (list.get(list.size() - 1).equals("!!")) {
+                if (cmdList.get(cmdList.size() - 1).equals("!!")) {
                    try {
                        pb.command(history.get(history.size() - 2));
                    } catch (ArrayIndexOutOfBoundsException aIOOBE) {
@@ -104,12 +111,12 @@ public class SimpleShell {
                    }
 
                 }//!<integer value i> command
-                else if (list.get(list.size() - 1).charAt(0) == '!') {
-                    int b = Character.getNumericValue(list.get(list.size() - 1).charAt(1));
+                else if (cmdList.get(cmdList.size() - 1).charAt(0) == '!') {
+                    int b = Character.getNumericValue(cmdList.get(cmdList.size() - 1).charAt(1));
                     if (b <= history.size())//check if integer entered isn't bigger than history size
                         pb.command(history.get(b));
                 } else {
-                    pb.command(list);
+                    pb.command(cmdList);
                 }
 
                  // wait, wait, what curiousness is this?
