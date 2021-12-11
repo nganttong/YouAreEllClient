@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,9 +24,17 @@ public class MessageController {
             return new ArrayList<>();
         }
     }
+
     public ArrayList<Message> getMessagesForId(Id Id) {
-        return null;
+        String result = HTTPController.getUrl("/ids/" + Id.getGithub() + "/messages/");
+        try {
+            return objectMapper.readValue(result, new TypeReference<ArrayList<Message>>() {});
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return new ArrayList<>();
+        }
     }
+
     public Message getMessageForSequence(String seq) {
         return null;
     }

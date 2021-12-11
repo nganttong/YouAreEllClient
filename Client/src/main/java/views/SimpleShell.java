@@ -73,30 +73,38 @@ public class SimpleShell {
                 // Specific Commands.
 
                 // ids
+                //get all ids
                 if (cmdList.contains("ids") && cmdList.size() == 1) {
                     List<Id> results = tController.getIds();
                     SimpleShell.prettyPrint(results.stream().map(i -> i.toString() + "\n").collect(Collectors.joining()));
                     continue;
                 }
-
+                //post id
                 if (cmdList.get(0).equals("ids") && cmdList.size() == 3) {
                     String results = tController.postId(cmdList.get(1), cmdList.get(2));
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
-
+                //put/update name linked to github id
                 if (cmdList.get(0).equals("ids") && cmdList.size() == 2) {
                     String results = tController.putId(cmdList.get(1));
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
+
                 // messages
-                if (cmdList.contains("messages")) {
+                //get all messages
+                if (cmdList.contains("messages") && cmdList.size() == 1) {
                     List<Message> results = tController.getMessages();
                     SimpleShell.prettyPrint(results.stream().map(i -> i.toString() + "\n").collect(Collectors.joining()));
                     continue;
                 }
-                // you need to add a bunch more.
+                //last 20 messages sent to your github id
+                 if (cmdList.contains("messages") && cmdList.size() == 2) {
+                    List<Message> results = tController.getMessages();
+                    SimpleShell.prettyPrint(results.stream().map(i -> i.toString() + "\n").collect(Collectors.joining()));
+                    continue;
+
 
 //                if (list.contains("send")) {
 //                    List<Message> results = tController.getMessages();

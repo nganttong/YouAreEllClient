@@ -24,6 +24,10 @@ public class TransactionController {
         return msgCtrl.getMessages();
     }
 
+    public List<Message> getMessageForId(Id githubId) {
+        return msgCtrl.getMessagesForId(githubId);
+    }
+
     public String postId(String idtoRegister, String githubName) {
         Id tempId = new Id(idtoRegister, githubName);
         tempId = idCtrl.postId(tempId);
@@ -34,7 +38,7 @@ public class TransactionController {
     }
 
     public String putId (String updatedName) {
-        Id updatedCredentials = new Id(updatedName, idCtrl.myId.getGithub());
+        Id updatedCredentials = new Id(idCtrl.myId.getUid(), updatedName, idCtrl.myId.getGithub());
         updatedCredentials = idCtrl.putId(updatedCredentials);
         if(updatedCredentials == null) {
             return ("Name not updated, something broke.");
