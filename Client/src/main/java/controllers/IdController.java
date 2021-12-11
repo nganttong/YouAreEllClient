@@ -13,7 +13,7 @@ import models.Id;
 public class IdController {
     private HashMap<String, Id> allIds;
     private ObjectMapper objectMapper = new ObjectMapper();
-    Id myId;
+    public Id myId;
 
     public ArrayList<Id> getIds() {
         String result = HTTPController.getUrl("/ids");
@@ -33,7 +33,8 @@ public class IdController {
         try {
             body = objectMapper.writeValueAsString(id);
             result = HTTPController.postURL("/ids", body);
-            return objectMapper.readValue(result, Id.class);
+            myId = objectMapper.readValue(result, Id.class);
+            return myId;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return null;
@@ -46,7 +47,8 @@ public class IdController {
         try {
             body = objectMapper.writeValueAsString(id);
             result = HTTPController.putURL("/ids", body);
-            return objectMapper.readValue(result, Id.class);
+            myId = objectMapper.readValue(result, Id.class);
+            return myId;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return null;

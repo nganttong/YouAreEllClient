@@ -32,4 +32,13 @@ public class TransactionController {
         }
         return ("Id registered.");
     }
+
+    public String putId (String updatedName) {
+        Id updatedCredentials = new Id(updatedName, idCtrl.myId.getGithub());
+        updatedCredentials = idCtrl.putId(updatedCredentials);
+        if(updatedCredentials == null) {
+            return ("Name not updated, something broke.");
+        }
+        return ("Name updated.");
+    }
 }

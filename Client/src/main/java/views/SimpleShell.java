@@ -85,7 +85,7 @@ public class SimpleShell {
                     continue;
                 }
 
-
+                if (cmdList.get(0).equals("ids") && cmdList.size() == 2)
 
                 // messages
                 if (cmdList.contains("messages")) {
