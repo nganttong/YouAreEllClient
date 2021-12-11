@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Id;
@@ -42,8 +43,15 @@ public class MessageController {
         return null;
     }
 
-    public Message postMessage(Id myId, Id toId, Message msg) {
-        return null;
+    public Message postMessage(Message messageToSend) {
+        try {
+            String messageToSendAsString = objectMapper.writeValueAsString(messageToSend);
+            String result = HTTPController.postURL("/ids/" + messageToSend.getFromId() + "/messages", messageToSendAsString);
+            return objectMapper.readValue(result, Message.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
  
 }

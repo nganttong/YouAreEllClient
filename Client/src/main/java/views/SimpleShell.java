@@ -106,13 +106,20 @@ public class SimpleShell {
                      continue;
                  }
 
-
-
-//                if (list.contains("send")) {
-//                    List<Message> results = tController.getMessages();
-//                    SimpleShell.prettyPrint(results.stream().map(i -> i.toString() + "\n").collect(Collectors.joining()));
-//                    continue;
-//                }
+                if (cmdList.get(0).equals("send") && cmdList.size() >= 3) {
+                    if(cmdList.get(cmdList.size() - 2).equals("to")
+                            && !cmdList.get(cmdList.size() - 1).contains("'")) {
+                        //this will be send to specific person
+                        String message = String.join(" ", cmdList.subList(2, (cmdList.size() - 2)));
+                        Message results = tController.postMessage(cmdList.get(1), cmdList.get(cmdList.size() - 1), message);
+                        SimpleShell.prettyPrint(results.toString());
+                    } else {
+                        //this send to global timeline
+                        String message = String.join(" ", cmdList.subList(2, (cmdList.size())));
+                        Message results = tController.postMessage(cmdList.get(1), message);
+                        SimpleShell.prettyPrint(results.toString());
+                    }
+                }
 
                 //!! command returns the last command in history
                 if (cmdList.get(cmdList.size() - 1).equals("!!")) {
@@ -132,19 +139,19 @@ public class SimpleShell {
                     pb.command(cmdList);
                 }
 
-                 // wait, wait, what curiousness is this?
-                 Process process = pb.start();
-
-                 //obtain the input stream
-                 InputStream is = process.getInputStream();
-                 InputStreamReader isr = new InputStreamReader(is);
-                 BufferedReader br = new BufferedReader(isr);
-
-                 //read output of the process
-                 String line;
-                 while ((line = br.readLine()) != null)
-                     System.out.println(line);
-                 br.close();
+//                 // wait, wait, what curiousness is this?
+//                 Process process = pb.start();
+//
+//                 //obtain the input stream
+//                 InputStream is = process.getInputStream();
+//                 InputStreamReader isr = new InputStreamReader(is);
+//                 BufferedReader br = new BufferedReader(isr);
+//
+//                 //read output of the process
+//                 String line;
+//                 while ((line = br.readLine()) != null)
+//                     System.out.println(line);
+//                 br.close();
 
 
 //            }

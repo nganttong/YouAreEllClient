@@ -2,7 +2,6 @@ package controllers;
 
 import models.Id;
 import models.Message;
-import sun.misc.resources.Messages;
 
 import java.util.List;
 
@@ -35,6 +34,16 @@ public class TransactionController {
             return ("Id not registered, something broke.");
         }
         return ("Id registered.");
+    }
+
+    public Message postMessage(String myId, String toId, String message) {
+        Message messageToSend = new Message(message, myId, toId);
+        return msgCtrl.postMessage(messageToSend);
+    }
+
+    public Message postMessage(String myId, String message) {
+        Message messageToSend = new Message(message, myId);
+        return msgCtrl.postMessage(messageToSend);
     }
 
     public String putId (String updatedName) {
