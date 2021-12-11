@@ -1,6 +1,8 @@
 package controllers;
 
 import models.Id;
+import models.Message;
+import sun.misc.resources.Messages;
 
 import java.util.List;
 
@@ -16,6 +18,10 @@ public class TransactionController {
 
     public List<Id> getIds() {
         return idCtrl.getIds();
+    }
+
+    public List<Message> getMessages() {
+        return msgCtrl.getMessages();
     }
 
     public String postId(String idtoRegister, String githubName) {

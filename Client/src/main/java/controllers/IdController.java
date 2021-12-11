@@ -12,7 +12,6 @@ public class IdController {
     private ObjectMapper objectMapper = new ObjectMapper();
     Id myId;
 
-
     public ArrayList<Id> getIds() {
         String result = HTTPController.getUrl("/ids");
         try {

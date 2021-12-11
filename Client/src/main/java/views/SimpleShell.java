@@ -12,6 +12,7 @@ import controllers.IdController;
 import controllers.MessageController;
 import controllers.TransactionController;
 import models.Id;
+import models.Message;
 //import youareell.YouAreEll;
 
 // Simple Shell is a Console view for youareell.YouAreEll.
@@ -79,11 +80,11 @@ public class SimpleShell {
                 }
 
                 // messages
-//                if (list.contains("messages")) {
-//                    String results = webber.get_messages();
-//                    SimpleShell.prettyPrint(results);
-//                    continue;
-//                }
+                if (list.contains("messages")) {
+                    List<Message> results = tController.getMessages();
+                    SimpleShell.prettyPrint(results.stream().map(i -> i.toString() + "\n").collect(Collectors.joining()));
+                    continue;
+                }
                 // you need to add a bunch more.
 
                 //!! command returns the last command in history
