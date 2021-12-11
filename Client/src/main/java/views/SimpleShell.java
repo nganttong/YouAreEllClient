@@ -101,9 +101,11 @@ public class SimpleShell {
                 }
                 //last 20 messages sent to your github id
                  if (cmdList.contains("messages") && cmdList.size() == 2) {
-                    List<Message> results = tController.getMessages();
-                    SimpleShell.prettyPrint(results.stream().map(i -> i.toString() + "\n").collect(Collectors.joining()));
-                    continue;
+                     List<Message> results = tController.getMessageForId(cmdList.get(1));
+                     SimpleShell.prettyPrint(results.stream().map(i -> i.toString() + "\n").collect(Collectors.joining()));
+                     continue;
+                 }
+
 
 
 //                if (list.contains("send")) {

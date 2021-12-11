@@ -24,7 +24,7 @@ public class TransactionController {
         return msgCtrl.getMessages();
     }
 
-    public List<Message> getMessageForId(Id githubId) {
+    public List<Message> getMessageForId(String githubId) {
         return msgCtrl.getMessagesForId(githubId);
     }
 

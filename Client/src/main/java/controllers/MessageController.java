@@ -25,8 +25,8 @@ public class MessageController {
         }
     }
 
-    public ArrayList<Message> getMessagesForId(Id Id) {
-        String result = HTTPController.getUrl("/ids/" + Id.getGithub() + "/messages/");
+    public ArrayList<Message> getMessagesForId(String id) {
+        String result = HTTPController.getUrl("/ids/" + id + "/messages");
         try {
             return objectMapper.readValue(result, new TypeReference<ArrayList<Message>>() {});
         } catch (Exception exception) {
