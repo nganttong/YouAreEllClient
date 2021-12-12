@@ -54,4 +54,12 @@ public class TransactionController {
         }
         return ("Name updated.");
     }
+
+    public Message messageForSeq(String id, String seq) {
+        return msgCtrl.getMessageForSequence(id, seq);
+    }
+
+    public List<Message> messagesFromYouToMe (String myId, String friendId) {
+        return msgCtrl.getMessagesFromFriend(myId, friendId);
+    }
 }

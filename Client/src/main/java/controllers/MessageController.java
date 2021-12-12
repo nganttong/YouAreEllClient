@@ -36,11 +36,23 @@ public class MessageController {
         }
     }
 
-    public Message getMessageForSequence(String seq) {
-        return null;
+    public Message getMessageForSequence(String id, String seq) {
+        String results = HTTPController.getUrl("/ids/" + id + "/messages/" + seq);
+        try {
+            return objectMapper.readValue(results, Message.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-    public ArrayList<Message> getMessagesFromFriend(Id myId, Id friendId) {
-        return null;
+    public ArrayList<Message> getMessagesFromFriend(String myId, String friendId) {
+        String results = HTTPController.getUrl("/ids/" + myId + "/from/" + friendId);
+        try {
+            return objectMapper.readValue(results, new TypeReference<ArrayList<Message>>() {});
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Message postMessage(Message messageToSend) {
